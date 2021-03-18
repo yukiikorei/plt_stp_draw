@@ -1,5 +1,9 @@
 # plt_stp_draw 使用plt库绘制斯坦纳实例图像
 
+#### 3.17 更新
+
+- 增加对新解格式(.st)的支持，不需要额外的escape graph对解进行解释
+
 
 
 ## 文件格式
@@ -24,12 +28,21 @@
   S 4713 4654
   ```
 
-- result文件
+- result文件(.edge)(旧)
 
   ```shell
   #E表示斯坦纳树中包括的segment的两个端点
   E 45 328
   ```
+
+- steiner tree文件(.st)(新)
+
+  ```shell
+  #E表示斯坦纳树中包括的segment的两个端点的座标 x1 y1 x2 y2
+  E 80 190 80 300
+  ```
+
+  
 
 
 
@@ -45,16 +58,25 @@
 
 - 生成escape graph(画出端点，障碍和escape segment，escape segment会覆盖障碍的边)
 
-  `$ secape.py 实例文件 escape graph文件`
+  `$ secape.py 实例文件 escape_graph文件`
 
   例：
 
   `$ ./escape.py instance/RC01.stp escape_graph/RC01.eg`
 
-- 生成斯坦纳树(障碍，端点和斯坦纳树使用的边)
+- 生成斯坦纳树(障碍，端点和斯坦纳树使用的边)(旧解格式)
 
   `$ result.py 实例文件 escape graph文件 result文件`
 
   例：
 
   `$ ./result.py instance/RC01.stp escape_graph/RC01.eg result/rc01.edge`
+  
+- 生成斯坦纳树(新解格式)
+
+  `$ steiner_tree.py 实例文件  steiner_tree文件`
+
+  例：
+
+  `$ ./result.py instance/RC12.stp steiner_tree/rc12.01.st`
+
